@@ -7,14 +7,8 @@
   var isAlarmPlaying = false;
   var alarmInterval = null;
   var lastAlarmKey = null;
-  var triggeredIds = {};
-
-  function getAudioContext() {
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    return audioContext;
-  }
+  var triggeredStartIds = {};
+  var triggeredEndIds = {};
 
   function playTone(ctx, freq) {
     oscillator = ctx.createOscillator();
@@ -30,31 +24,26 @@
   }
 
   function playBeep() {
-    if (!isAlarmPlaying) return;
-    var ctx = getAudioContext();
+    if (!isAlarmPlaying || !audioContext) return;
 
-    // Resume context if suspended (browser autoplay policy)
-    if (ctx.state === 'suspended') {
-      ctx.resume();
-    }
-
-    playTone(ctx, 880);
+    playTone(audioContext, 880);
 
     setTimeout(function () {
       if (!isAlarmPlaying) return;
-      playTone(ctx, 1046.5);
+      playTone(audioContext, 1046.5);
     }, 350);
   }
 
-  function trigger(schedule) {
+  function trigger(schedule, type) {
     var alarmScheduleName = document.getElementById('alarmScheduleName');
     var alarmTime = document.getElementById('alarmTime');
     var alarmModal = document.getElementById('alarmModal');
+    var time = type === 'end' ? schedule.endTime : schedule.startTime;
 
-    alarmScheduleName.textContent = schedule.title;
+    alarmScheduleName.textContent = schedule.title + (type === 'end' ? '（结束）' : '');
     alarmTime.textContent =
-      schedule.time.hour.toString().padStart(2, '0') + ':' +
-      schedule.time.minute.toString().padStart(2, '0');
+      time.hour.toString().padStart(2, '0') + ':' +
+      time.minute.toString().padStart(2, '0');
     alarmModal.classList.add('active');
 
     if (isAlarmPlaying) return;
@@ -74,10 +63,21 @@
       alarmInterval = null;
     }
     document.getElementById('alarmModal').classList.remove('active');
-    triggeredIds = {};
+    triggeredStartIds = {};
+    triggeredEndIds = {};
+  }
+
+  function checkTime(scheduleTime) {
+    if (!scheduleTime) return null;
+    var now = new Date();
+    var currentTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    var scheduleTimeStr = scheduleTime.hour.toString().padStart(2, '0') + ':' + scheduleTime.minute.toString().padStart(2, '0');
+    return currentTime === scheduleTimeStr;
   }
 
   function check(schedules) {
+    if (!audioContext) return;
+
     var now = new Date();
     var currentTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
     var currentDay = now.getDay();
@@ -88,28 +88,38 @@
     if (alarmKey === lastAlarmKey) return;
 
     lastAlarmKey = alarmKey;
-    triggeredIds = {};
+    triggeredStartIds = {};
+    triggeredEndIds = {};
 
     schedules.forEach(function (schedule) {
       if (!schedule.enabled) return;
       if (schedule.days.indexOf(currentDay) === -1) return;
 
-      var scheduleTime = schedule.time.hour.toString().padStart(2, '0') + ':' + schedule.time.minute.toString().padStart(2, '0');
+      // Check start time
+      if (checkTime(schedule.startTime)) {
+        if (!triggeredStartIds[schedule.id]) {
+          triggeredStartIds[schedule.id] = true;
+          trigger(schedule, 'start');
+        }
+      }
 
-      if (scheduleTime === currentTime) {
-        if (!triggeredIds[schedule.id]) {
-          triggeredIds[schedule.id] = true;
-          trigger(schedule);
+      // Check end time
+      if (checkTime(schedule.endTime)) {
+        if (!triggeredEndIds[schedule.id]) {
+          triggeredEndIds[schedule.id] = true;
+          trigger(schedule, 'end');
         }
       }
     });
   }
 
-  // Resume AudioContext on first user interaction (browser autoplay policy)
+  // Create AudioContext on first user interaction (browser autoplay policy)
   function resumeOnInteraction() {
-    var ctx = getAudioContext();
-    if (ctx.state === 'suspended') {
-      ctx.resume();
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
     }
     document.removeEventListener('click', resumeOnInteraction);
     document.removeEventListener('touchstart', resumeOnInteraction);

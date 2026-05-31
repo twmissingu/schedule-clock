@@ -22,8 +22,8 @@
     var today = new Date().getDay();
 
     var allSchedules = schedules.slice().sort(function (a, b) {
-      var aTime = a.time.hour * 60 + a.time.minute;
-      var bTime = b.time.hour * 60 + b.time.minute;
+      var aTime = a.startTime.hour * 60 + a.startTime.minute;
+      var bTime = b.startTime.hour * 60 + b.startTime.minute;
       if (aTime !== bTime) return aTime - bTime;
       // Monday-first order: Mon=0, Tue=1, ... Sun=6
       var aDay = a.days[0] === 0 ? 6 : a.days[0] - 1;
@@ -41,7 +41,10 @@
     }
 
     els.scheduleList.innerHTML = allSchedules.map(function (schedule) {
-      var timeStr = schedule.time.hour.toString().padStart(2, '0') + ':' + schedule.time.minute.toString().padStart(2, '0');
+      var timeStr = schedule.startTime.hour.toString().padStart(2, '0') + ':' + schedule.startTime.minute.toString().padStart(2, '0');
+      if (schedule.endTime) {
+        timeStr += ' - ' + schedule.endTime.hour.toString().padStart(2, '0') + ':' + schedule.endTime.minute.toString().padStart(2, '0');
+      }
       var daysStr = schedule.days.map(function (d) {
         return '<span class="day-badge ' + (d === today ? 'active' : '') + '">' + App.DAYS[App.dayIndex(d)].charAt(1) + '</span>';
       }).join('');
@@ -78,8 +81,15 @@
     if (schedule) {
       selectedIcon = schedule.icon;
       els.titleInput.value = schedule.title;
-      els.hourInput.value = schedule.time.hour;
-      els.minuteInput.value = schedule.time.minute;
+      els.startHourInput.value = schedule.startTime.hour;
+      els.startMinuteInput.value = schedule.startTime.minute;
+      if (schedule.endTime) {
+        els.endHourInput.value = schedule.endTime.hour;
+        els.endMinuteInput.value = schedule.endTime.minute;
+      } else {
+        els.endHourInput.value = '';
+        els.endMinuteInput.value = '';
+      }
       selectedDays = schedule.days.slice();
 
       els.iconGrid.querySelectorAll('.icon-option').forEach(function (btn) {
@@ -92,8 +102,10 @@
     } else {
       selectedIcon = 'piano';
       els.titleInput.value = '钢琴';
-      els.hourInput.value = 9;
-      els.minuteInput.value = 0;
+      els.startHourInput.value = 9;
+      els.startMinuteInput.value = 0;
+      els.endHourInput.value = '';
+      els.endMinuteInput.value = '';
       selectedDays = [new Date().getDay()];
 
       els.iconGrid.querySelectorAll('.icon-option').forEach(function (btn, i) {
@@ -115,8 +127,17 @@
 
   function saveSchedule() {
     var title = els.titleInput.value.trim() || '日程';
-    var hour = Math.min(23, Math.max(0, parseInt(els.hourInput.value) || 0));
-    var minute = Math.min(59, Math.max(0, parseInt(els.minuteInput.value) || 0));
+    var startHour = Math.min(23, Math.max(0, parseInt(els.startHourInput.value) || 0));
+    var startMinute = Math.min(59, Math.max(0, parseInt(els.startMinuteInput.value) || 0));
+    var endHourRaw = els.endHourInput.value.trim();
+    var endMinuteRaw = els.endMinuteInput.value.trim();
+    var endTime = null;
+    if (endHourRaw !== '' || endMinuteRaw !== '') {
+      endTime = {
+        hour: Math.min(23, Math.max(0, parseInt(endHourRaw) || 0)),
+        minute: Math.min(59, Math.max(0, parseInt(endMinuteRaw) || 0))
+      };
+    }
 
     if (selectedDays.length === 0) {
       alert('请至少选择一个重复周期');
@@ -129,7 +150,8 @@
         App.schedules[index] = Object.assign({}, App.schedules[index], {
           title: title,
           icon: selectedIcon,
-          time: { hour: hour, minute: minute },
+          startTime: { hour: startHour, minute: startMinute },
+          endTime: endTime,
           days: selectedDays.slice().sort(function (a, b) { return a - b; })
         });
       }
@@ -138,7 +160,8 @@
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         title: title,
         icon: selectedIcon,
-        time: { hour: hour, minute: minute },
+        startTime: { hour: startHour, minute: startMinute },
+        endTime: endTime,
         days: selectedDays.slice().sort(function (a, b) { return a - b; }),
         enabled: true
       });
@@ -163,8 +186,10 @@
     els.iconGrid = document.getElementById('iconGrid');
     els.daySelector = document.getElementById('daySelector');
     els.titleInput = document.getElementById('titleInput');
-    els.hourInput = document.getElementById('hourInput');
-    els.minuteInput = document.getElementById('minuteInput');
+    els.startHourInput = document.getElementById('startHourInput');
+    els.startMinuteInput = document.getElementById('startMinuteInput');
+    els.endHourInput = document.getElementById('endHourInput');
+    els.endMinuteInput = document.getElementById('endMinuteInput');
     els.modalTitle = document.getElementById('modalTitle');
 
     document.getElementById('addBtn').addEventListener('click', function () { openModal(); });

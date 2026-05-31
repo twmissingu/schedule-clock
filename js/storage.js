@@ -31,7 +31,16 @@
         var data = localStorage.getItem(STORAGE_KEY);
         if (data) {
           var parsed = JSON.parse(data);
-          return parsed.schedules || [];
+          var schedules = parsed.schedules || [];
+          // Migrate old format: time → startTime + endTime
+          return schedules.map(function (s) {
+            if (s.time && !s.startTime) {
+              s.startTime = s.time;
+              delete s.time;
+            }
+            if (!s.startTime) s.startTime = { hour: 9, minute: 0 };
+            return s;
+          });
         }
       } catch (e) {
         // ignore
