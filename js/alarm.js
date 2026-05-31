@@ -6,8 +6,8 @@
   var oscillator = null;
   var isAlarmPlaying = false;
   var alarmInterval = null;
-  var lastAlarmCheck = null;
-  var lastAlarmId = null;
+  var lastAlarmKey = null;
+  var triggeredIds = {};
 
   function getAudioContext() {
     if (!audioContext) {
@@ -19,6 +19,11 @@
   function playBeep() {
     if (!isAlarmPlaying) return;
     var ctx = getAudioContext();
+
+    // Resume context if suspended (browser autoplay policy)
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
 
     oscillator = ctx.createOscillator();
     var gainNode = ctx.createGain();
@@ -74,7 +79,7 @@
       alarmInterval = null;
     }
     document.getElementById('alarmModal').classList.remove('active');
-    lastAlarmId = null;
+    triggeredIds = {};
   }
 
   function check(schedules) {
@@ -85,9 +90,10 @@
     var alarmKey = currentTime + '-' + currentDay;
 
     if (currentSecond !== 0) return;
-    if (alarmKey === lastAlarmCheck) return;
+    if (alarmKey === lastAlarmKey) return;
 
-    lastAlarmCheck = alarmKey;
+    lastAlarmKey = alarmKey;
+    triggeredIds = {};
 
     schedules.forEach(function (schedule) {
       if (!schedule.enabled) return;
@@ -96,13 +102,25 @@
       var scheduleTime = schedule.time.hour.toString().padStart(2, '0') + ':' + schedule.time.minute.toString().padStart(2, '0');
 
       if (scheduleTime === currentTime) {
-        if (lastAlarmId !== schedule.id) {
-          lastAlarmId = schedule.id;
+        if (!triggeredIds[schedule.id]) {
+          triggeredIds[schedule.id] = true;
           trigger(schedule);
         }
       }
     });
   }
+
+  // Resume AudioContext on first user interaction (browser autoplay policy)
+  function resumeOnInteraction() {
+    var ctx = getAudioContext();
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+    document.removeEventListener('click', resumeOnInteraction);
+    document.removeEventListener('touchstart', resumeOnInteraction);
+  }
+  document.addEventListener('click', resumeOnInteraction);
+  document.addEventListener('touchstart', resumeOnInteraction);
 
   window.App = window.App || {};
   window.App.alarm = {
