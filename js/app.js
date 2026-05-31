@@ -3,7 +3,6 @@
  */
 (function () {
   window.App = window.App || {};
-  window.App.schedules = [];
 
   // 初始化各模块
   App.schedules = App.storage.load();

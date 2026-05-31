@@ -2,8 +2,6 @@
  * clock.js — 时钟显示、指针动画
  */
 (function () {
-  var DAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-
   var els = {};
 
   function update() {
@@ -14,7 +12,7 @@
 
     els.timeDisplay.textContent = hours + ':' + minutes;
     els.dateDisplay.textContent = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日';
-    els.dayDisplay.textContent = DAYS[now.getDay()];
+    els.dayDisplay.textContent = App.DAYS[now.getDay()];
 
     var secondDeg = seconds * 6;
     var minuteDeg = (now.getMinutes() + seconds / 60) * 6;

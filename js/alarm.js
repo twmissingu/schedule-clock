@@ -66,7 +66,8 @@
   function stop() {
     isAlarmPlaying = false;
     if (oscillator) {
-      try { oscillator.stop(); } catch (e) { /* ignore */ }
+      // InvalidStateError if already stopped — safe to ignore
+      try { oscillator.stop(); } catch (e) { /* already stopped */ }
     }
     if (alarmInterval) {
       clearInterval(alarmInterval);

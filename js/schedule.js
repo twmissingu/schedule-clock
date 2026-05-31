@@ -13,8 +13,6 @@
     drawing: '#FF6B6B'
   };
 
-  var DAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-
   var els = {};
   var editingId = null;
   var selectedIcon = 'piano';
@@ -42,17 +40,17 @@
     els.scheduleList.innerHTML = allSchedules.map(function (schedule) {
       var timeStr = schedule.time.hour.toString().padStart(2, '0') + ':' + schedule.time.minute.toString().padStart(2, '0');
       var daysStr = schedule.days.map(function (d) {
-        return '<span class="day-badge ' + (d === today ? 'active' : '') + '">' + DAYS[d].charAt(0) + '</span>';
+        return '<span class="day-badge ' + (d === today ? 'active' : '') + '">' + App.DAYS[d].charAt(0) + '</span>';
       }).join('');
       var iconColor = ICON_COLORS[schedule.icon] || '#FFB6C1';
 
       return (
         '<div class="schedule-card" style="--icon-color: ' + iconColor + '; ' + (!schedule.enabled ? 'opacity: 0.5;' : '') + '">' +
         '<div class="schedule-icon" style="background: ' + iconColor + '20;">' +
-        '<svg style="color: ' + iconColor + ';"><use href="#icon-' + schedule.icon + '"/></svg>' +
+        '<svg style="color: ' + iconColor + ';"><use href="#icon-' + App.escapeHtml(schedule.icon) + '"/></svg>' +
         '</div>' +
         '<div class="schedule-info">' +
-        '<div class="schedule-title">' + schedule.title + '</div>' +
+        '<div class="schedule-title">' + App.escapeHtml(schedule.title) + '</div>' +
         '<div class="schedule-time">' + timeStr + '</div>' +
         '<div class="schedule-days">' + daysStr + '</div>' +
         '</div>' +
@@ -188,11 +186,10 @@
       btn.addEventListener('click', function () {
         var day = parseInt(btn.dataset.day);
         btn.classList.toggle('selected');
-        var idx = selectedDays.indexOf(day);
-        if (idx !== -1) {
-          selectedDays.splice(idx, 1);
+        if (selectedDays.indexOf(day) !== -1) {
+          selectedDays = selectedDays.filter(function (d) { return d !== day; });
         } else {
-          selectedDays.push(day);
+          selectedDays = selectedDays.concat([day]);
         }
       });
     });
