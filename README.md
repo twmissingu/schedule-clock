@@ -1,42 +1,98 @@
-# 小可爱日程时钟
+[![English](https://img.shields.io/badge/English-blue.svg)](README.md)
+[![中文](https://img.shields.io/badge/中文-red.svg)](README_zh.md)
 
-一个童趣风格的日程时钟网页应用，专为小女孩设计。
+---
 
-## 功能特点
+# 🌸 Schedule Clock
 
-- 实时时钟显示，配可爱圆盘时钟样式
-- 课程图标选择：钢琴、跳舞、英语、绘画、阅读、运动、音乐、美术
-- 设置每周固定时间的日程计划
-- 到点闹铃提醒功能
-- 粉色和蓝色系配色，可爱小动物贴纸装饰
-- 自适应移动端
-- 数据自动保存到本地
+A cute, kid-friendly schedule clock web app — zero dependencies, runs anywhere.
 
-## 部署到 GitHub Pages
+## Why This Project?
 
-1. 创建新仓库，名称如 `schedule-clock`
-2. 将 `index.html` 推送到仓库的 `gh-pages` 分支
-3. 访问 `https://你的用户名.github.io/schedule-clock/`
+Kids need a simple, visual way to see their daily routine. This app shows a real-time clock with adorable animal stickers and color-coded schedule cards. When it's time for piano practice or English class, a friendly alarm goes off.
 
-或者使用 GitHub Actions 自动部署，参考配置：
+No frameworks. No build tools. No accounts. Just open `index.html` and it works.
 
-```yaml
-name: Deploy
-on: push
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+## Features
+
+- 🕐 Real-time analog + digital clock display
+- 🎨 8 course icons (piano, dance, English, art, reading, sports, music, drawing)
+- 📅 Weekly recurring schedule planner
+- 🔔 Two-tone alarm when a scheduled time arrives
+- 🐰 Cute animal stickers (bunny, bear, cat) with sparkle animations
+- 📱 Mobile-first responsive design
+- 💾 Auto-save to LocalStorage
+
+## Quick Start
+
+### Prerequisites
+
+A modern web browser (Chrome, Firefox, Safari, Edge).
+
+### Installation
+
+```bash
+git clone https://github.com/YOUR_USERNAME/schedule-clock.git
+cd schedule-clock
 ```
 
-## 技术栈
+### Usage
 
-- 纯 HTML + CSS + JavaScript
-- 无外部依赖
-- LocalStorage 数据持久化
-- Web Audio API 闹铃音效
+Open directly in browser:
+
+```bash
+open index.html
+```
+
+Or use a local server:
+
+```bash
+npx serve .
+# or
+python3 -m http.server
+```
+
+Then visit `http://localhost:8080` (or whatever port your server uses).
+
+## For AI Agents
+
+This project is designed for seamless AI agent interaction:
+
+1. **Clone and run**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/schedule-clock.git
+   cd schedule-clock
+   open index.html
+   ```
+
+2. **Architecture**
+   - `index.html` — page structure (HTML only)
+   - `styles.css` — all styling
+   - `icons.svg` — SVG symbol definitions
+   - `js/storage.js` — LocalStorage wrapper + shared constants
+   - `js/clock.js` — clock display + hand animation
+   - `js/alarm.js` — alarm detection + Web Audio playback
+   - `js/schedule.js` — schedule CRUD, list rendering, modal interaction
+   - `js/app.js` — main entry, initializes all modules
+
+3. **Key patterns**
+   - Global `window.App` namespace (no ES Modules, no build tools)
+   - Script loading order: `icons.js` → `storage.js` → `clock.js` → `alarm.js` → `schedule.js` → `app.js`
+   - Data persists to `localStorage` under key `schedule_clock_data`
+
+4. **Modifying**
+   - Edit `styles.css` for visual changes
+   - Edit individual `js/*.js` files for behavior changes
+   - No build step required — refresh browser to see changes
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
