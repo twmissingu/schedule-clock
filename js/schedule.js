@@ -25,7 +25,10 @@
       var aTime = a.time.hour * 60 + a.time.minute;
       var bTime = b.time.hour * 60 + b.time.minute;
       if (aTime !== bTime) return aTime - bTime;
-      return a.days[0] - b.days[0];
+      // Monday-first order: Mon=0, Tue=1, ... Sun=6
+      var aDay = a.days[0] === 0 ? 6 : a.days[0] - 1;
+      var bDay = b.days[0] === 0 ? 6 : b.days[0] - 1;
+      return aDay - bDay;
     });
 
     if (schedules.length === 0) {
@@ -40,7 +43,7 @@
     els.scheduleList.innerHTML = allSchedules.map(function (schedule) {
       var timeStr = schedule.time.hour.toString().padStart(2, '0') + ':' + schedule.time.minute.toString().padStart(2, '0');
       var daysStr = schedule.days.map(function (d) {
-        return '<span class="day-badge ' + (d === today ? 'active' : '') + '">' + App.DAYS[d].charAt(0) + '</span>';
+        return '<span class="day-badge ' + (d === today ? 'active' : '') + '">' + App.DAYS[App.dayIndex(d)].charAt(1) + '</span>';
       }).join('');
       var iconColor = ICON_COLORS[schedule.icon] || '#FFB6C1';
 
@@ -88,7 +91,7 @@
       });
     } else {
       selectedIcon = 'piano';
-      els.titleInput.value = '钢琴课';
+      els.titleInput.value = '钢琴';
       els.hourInput.value = 9;
       els.minuteInput.value = 0;
       selectedDays = [new Date().getDay()];

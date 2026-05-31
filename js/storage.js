@@ -3,7 +3,12 @@
  */
 (function () {
   var STORAGE_KEY = 'schedule_clock_data';
-  var DAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  var DAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
+  // getDay() returns 0=Sun,1=Mon...6=Sat → map to 0=Mon...6=Sun
+  function dayIndex(jsDay) {
+    return jsDay === 0 ? 6 : jsDay - 1;
+  }
 
   function escapeHtml(str) {
     var div = document.createElement('div');
@@ -13,6 +18,7 @@
 
   window.App = window.App || {};
   window.App.DAYS = DAYS;
+  window.App.dayIndex = dayIndex;
   window.App.escapeHtml = escapeHtml;
   window.App.storage = {
     save: function (schedules) {

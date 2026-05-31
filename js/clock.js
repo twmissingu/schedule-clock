@@ -12,7 +12,7 @@
 
     els.timeDisplay.textContent = hours + ':' + minutes;
     els.dateDisplay.textContent = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日';
-    els.dayDisplay.textContent = App.DAYS[now.getDay()];
+    els.dayDisplay.textContent = App.DAYS[App.dayIndex(now.getDay())];
 
     var secondDeg = seconds * 6;
     var minuteDeg = (now.getMinutes() + seconds / 60) * 6;
