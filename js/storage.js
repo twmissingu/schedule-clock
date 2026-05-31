@@ -10,10 +10,11 @@
     return jsDay === 0 ? 6 : jsDay - 1;
   }
 
+  var escapeDiv = null;
   function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
+    if (!escapeDiv) escapeDiv = document.createElement('div');
+    escapeDiv.textContent = str;
+    return escapeDiv.innerHTML;
   }
 
   window.App = window.App || {};

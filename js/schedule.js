@@ -115,8 +115,8 @@
 
   function saveSchedule() {
     var title = els.titleInput.value.trim() || '日程';
-    var hour = parseInt(els.hourInput.value) || 0;
-    var minute = parseInt(els.minuteInput.value) || 0;
+    var hour = Math.min(23, Math.max(0, parseInt(els.hourInput.value) || 0));
+    var minute = Math.min(59, Math.max(0, parseInt(els.minuteInput.value) || 0));
 
     if (selectedDays.length === 0) {
       alert('请至少选择一个重复周期');
@@ -135,7 +135,7 @@
       }
     } else {
       App.schedules.push({
-        id: Date.now().toString(),
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         title: title,
         icon: selectedIcon,
         time: { hour: hour, minute: minute },

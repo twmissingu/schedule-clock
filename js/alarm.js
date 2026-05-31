@@ -16,6 +16,19 @@
     return audioContext;
   }
 
+  function playTone(ctx, freq) {
+    oscillator = ctx.createOscillator();
+    var gainNode = ctx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    oscillator.frequency.value = freq;
+    oscillator.type = 'sine';
+    gainNode.gain.value = 0.3;
+    oscillator.start();
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+    oscillator.stop(ctx.currentTime + 0.3);
+  }
+
   function playBeep() {
     if (!isAlarmPlaying) return;
     var ctx = getAudioContext();
@@ -25,29 +38,11 @@
       ctx.resume();
     }
 
-    oscillator = ctx.createOscillator();
-    var gainNode = ctx.createGain();
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
-    oscillator.frequency.value = 880;
-    oscillator.type = 'sine';
-    gainNode.gain.value = 0.3;
-    oscillator.start();
-    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-    oscillator.stop(ctx.currentTime + 0.3);
+    playTone(ctx, 880);
 
     setTimeout(function () {
       if (!isAlarmPlaying) return;
-      oscillator = ctx.createOscillator();
-      var gainNode2 = ctx.createGain();
-      oscillator.connect(gainNode2);
-      gainNode2.connect(ctx.destination);
-      oscillator.frequency.value = 1046.5;
-      oscillator.type = 'sine';
-      gainNode2.gain.value = 0.3;
-      oscillator.start();
-      gainNode2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-      oscillator.stop(ctx.currentTime + 0.3);
+      playTone(ctx, 1046.5);
     }, 350);
   }
 
