@@ -1,0 +1,744 @@
+    :root {
+      --pink-light: #FFE4E9;
+      --pink-main: #FFB6C1;
+      --pink-dark: #FF69B4;
+      --blue-light: #E0F4FF;
+      --blue-main: #87CEEB;
+      --blue-dark: #4169E1;
+      --radius-lg: 24px;
+      --shadow-soft: 0 8px 24px rgba(255, 105, 180, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--pink-light) 0%, var(--blue-light) 50%, var(--pink-light) 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 20px;
+      padding-bottom: 100px;
+      position: relative;
+    }
+
+    .sticker {
+      position: fixed;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .sticker-bunny {
+      top: 10%;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+    }
+
+    .sticker-bear {
+      bottom: 20%;
+      left: -30px;
+      width: 100px;
+      height: 100px;
+    }
+
+    .sticker-cat {
+      top: 40%;
+      right: -25px;
+      width: 70px;
+      height: 70px;
+    }
+
+    .sticker-star {
+      top: 5%;
+      left: 5%;
+      width: 40px;
+      height: 40px;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+
+    .sticker-star-2 {
+      top: 15%;
+      right: 10%;
+      width: 30px;
+      height: 30px;
+      animation: twinkle 2s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .clock-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .clock-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--pink-main), var(--blue-main), var(--pink-main));
+      background-size: 200% 100%;
+      animation: gradientMove 3s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .clock-face {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #fff 0%, #f8f8f8 100%);
+      box-shadow: 
+        0 10px 30px rgba(135, 206, 235, 0.3),
+        inset 0 -5px 15px rgba(255, 105, 180, 0.1);
+      position: relative;
+      border: 6px solid var(--pink-main);
+    }
+
+    .clock-face::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      background: var(--pink-dark);
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    .clock-numbers {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .clock-number {
+      position: absolute;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--blue-dark);
+    }
+
+    .clock-hand {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform-origin: bottom center;
+      border-radius: 4px;
+    }
+
+    .hour-hand {
+      width: 6px;
+      height: 50px;
+      background: var(--blue-dark);
+      margin-left: -3px;
+    }
+
+    .minute-hand {
+      width: 4px;
+      height: 70px;
+      background: var(--pink-dark);
+      margin-left: -2px;
+    }
+
+    .second-hand {
+      width: 2px;
+      height: 80px;
+      background: #FFD700;
+      margin-left: -1px;
+    }
+
+    .time-display {
+      font-size: 48px;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--pink-dark), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .date-display {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .day-display {
+      font-size: 18px;
+      color: var(--blue-dark);
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 20px;
+      color: var(--blue-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 24px;
+      height: 24px;
+      background: var(--pink-main);
+      border-radius: 50%;
+      position: absolute;
+      left: -8px;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    .schedule-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .schedule-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .schedule-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(255, 105, 180, 0.25);
+    }
+
+    .schedule-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: var(--icon-color, var(--pink-main));
+    }
+
+    .schedule-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .schedule-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .schedule-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .schedule-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .schedule-time {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .schedule-days {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .day-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .day-badge.active {
+      background: var(--pink-main);
+      color: white;
+    }
+
+    .schedule-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .action-btn:active {
+      transform: scale(0.95);
+    }
+
+    .edit-btn {
+      background: var(--blue-light);
+    }
+
+    .delete-btn {
+      background: #FFE4E4;
+    }
+
+    .action-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-dark), var(--blue-dark));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(255, 105, 180, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .fab:hover {
+      transform: scale(1.1) rotate(90deg);
+      box-shadow: 0 12px 32px rgba(255, 105, 180, 0.5);
+    }
+
+    .fab:active {
+      transform: scale(0.95);
+    }
+
+    .fab svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--pink-dark), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: var(--pink-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover {
+      background: var(--pink-main);
+    }
+
+    .close-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+      display: block;
+      font-weight: bold;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .icon-option {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      border: 3px solid transparent;
+      background: var(--blue-light);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+      padding: 8px;
+    }
+
+    .icon-option:hover {
+      background: var(--pink-light);
+      transform: scale(1.05);
+    }
+
+    .icon-option.selected {
+      border-color: var(--pink-dark);
+      background: var(--pink-light);
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+    }
+
+    .icon-option svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .icon-option span {
+      font-size: 10px;
+      color: #666;
+      font-weight: bold;
+    }
+
+    .time-input-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .time-input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid var(--blue-light);
+      border-radius: 16px;
+      font-size: 18px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .time-input:focus {
+      outline: none;
+      border-color: var(--blue-main);
+    }
+
+    .time-separator {
+      font-size: 24px;
+      color: var(--pink-dark);
+      font-weight: bold;
+    }
+
+    .day-selector {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .day-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--blue-light);
+      background: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--blue-dark);
+      transition: all 0.2s;
+    }
+
+    .day-btn:hover {
+      background: var(--blue-light);
+    }
+
+    .day-btn.selected {
+      background: var(--pink-main);
+      border-color: var(--pink-main);
+      color: white;
+    }
+
+    .title-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--blue-light);
+      border-radius: 16px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .title-input:focus {
+      outline: none;
+      border-color: var(--blue-main);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px 24px;
+      border-radius: 16px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-cancel {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, var(--pink-dark), var(--blue-dark));
+      color: white;
+    }
+
+    .alarm-modal {
+      text-align: center;
+    }
+
+    .alarm-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      animation: shake 0.5s ease-in-out infinite;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(-10deg); }
+      50% { transform: rotate(10deg); }
+    }
+
+    .alarm-title {
+      font-size: 28px;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--pink-dark), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    .alarm-schedule-name {
+      font-size: 20px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .alarm-time {
+      font-size: 48px;
+      font-weight: bold;
+      color: var(--pink-dark);
+      margin-bottom: 24px;
+    }
+
+    .stop-btn {
+      background: linear-gradient(135deg, var(--pink-dark), var(--blue-dark));
+      color: white;
+      padding: 16px 48px;
+      font-size: 18px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+    }
+
+    .empty-state svg {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .app-container {
+        padding: 16px;
+        padding-bottom: 100px;
+      }
+
+      .clock-face {
+        width: 160px;
+        height: 160px;
+      }
+
+      .hour-hand {
+        height: 40px;
+      }
+
+      .minute-hand {
+        height: 55px;
+      }
+
+      .second-hand {
+        height: 65px;
+      }
+
+      .time-display {
+        font-size: 36px;
+      }
+
+      .clock-card {
+        padding: 20px;
+      }
+
+      .schedule-card {
+        padding: 16px;
+      }
+
+      .schedule-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .fab {
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+      }
+    }

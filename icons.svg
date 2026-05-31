@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="icon-bunny" viewBox="0 0 100 100">
+      <ellipse cx="30" cy="25" rx="12" ry="25" fill="#FFE4E9" stroke="#FFB6C1" stroke-width="3"/>
+      <ellipse cx="70" cy="25" rx="12" ry="25" fill="#FFE4E9" stroke="#FFB6C1" stroke-width="3"/>
+      <ellipse cx="50" cy="60" rx="35" ry="30" fill="#FFE4E9" stroke="#FFB6C1" stroke-width="3"/>
+      <circle cx="38" cy="52" r="5" fill="#333"/>
+      <circle cx="62" cy="52" r="5" fill="#333"/>
+      <ellipse cx="50" cy="65" rx="6" ry="4" fill="#FFB6C1"/>
+      <circle cx="30" cy="75" r="10" fill="#FFB6C1" opacity="0.5"/>
+      <circle cx="70" cy="75" r="10" fill="#FFB6C1" opacity="0.5"/>
+    </symbol>
+
+    <symbol id="icon-bear" viewBox="0 0 100 100">
+      <circle cx="25" cy="25" r="18" fill="#DEB887" stroke="#D2691E" stroke-width="3"/>
+      <circle cx="75" cy="25" r="18" fill="#DEB887" stroke="#D2691E" stroke-width="3"/>
+      <circle cx="50" cy="55" r="38" fill="#DEB887" stroke="#D2691E" stroke-width="3"/>
+      <circle cx="38" cy="48" r="5" fill="#333"/>
+      <circle cx="62" cy="48" r="5" fill="#333"/>
+      <ellipse cx="50" cy="62" rx="10" ry="8" fill="#D2691E"/>
+      <ellipse cx="50" cy="60" rx="6" ry="4" fill="#333"/>
+    </symbol>
+
+    <symbol id="icon-cat" viewBox="0 0 100 100">
+      <polygon points="20,50 35,20 50,50" fill="#FFE4E9" stroke="#FFB6C1" stroke-width="3"/>
+      <polygon points="50,50 65,20 80,50" fill="#FFE4E9" stroke="#FFB6C1" stroke-width="3"/>
+      <ellipse cx="50" cy="60" rx="35" ry="30" fill="#FFE4E9" stroke="#FFB6C1" stroke-width="3"/>
+      <circle cx="38" cy="52" r="5" fill="#333"/>
+      <circle cx="62" cy="52" r="5" fill="#333"/>
+      <ellipse cx="50" cy="65" rx="5" ry="3" fill="#FFB6C1"/>
+      <path d="M30 70 Q50 80 70 70" stroke="#FFB6C1" stroke-width="2" fill="none"/>
+    </symbol>
+
+    <symbol id="icon-star" viewBox="0 0 100 100">
+      <polygon points="50,5 61,40 98,40 68,62 79,97 50,75 21,97 32,62 2,40 39,40" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+    </symbol>
+
+    <symbol id="icon-piano" viewBox="0 0 100 100">
+      <rect x="10" y="30" width="80" height="50" rx="5" fill="#333"/>
+      <rect x="15" y="35" width="10" height="40" fill="white"/>
+      <rect x="27" y="35" width="10" height="40" fill="white"/>
+      <rect x="39" y="35" width="10" height="40" fill="white"/>
+      <rect x="51" y="35" width="10" height="40" fill="white"/>
+      <rect x="63" y="35" width="10" height="40" fill="white"/>
+      <rect x="75" y="35" width="10" height="40" fill="white"/>
+      <rect x="22" y="35" width="8" height="25" fill="#333"/>
+      <rect x="46" y="35" width="8" height="25" fill="#333"/>
+      <rect x="58" y="35" width="8" height="25" fill="#333"/>
+      <rect x="70" y="35" width="8" height="25" fill="#333"/>
+    </symbol>
+
+    <symbol id="icon-dance" viewBox="0 0 100 100">
+      <circle cx="50" cy="20" r="12" fill="#FFB6C1"/>
+      <path d="M50 32 L50 55 M50 40 L30 50 M50 40 L70 50 M50 55 L35 80 M50 55 L65 80" stroke="#FF69B4" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="30" cy="50" r="6" fill="#FF69B4"/>
+      <circle cx="70" cy="50" r="6" fill="#FF69B4"/>
+    </symbol>
+
+    <symbol id="icon-english" viewBox="0 0 100 100">
+      <text x="50" y="35" text-anchor="middle" font-size="24" font-weight="bold" fill="#4169E1">ABC</text>
+      <text x="50" y="60" text-anchor="middle" font-size="20" font-weight="bold" fill="#87CEEB">123</text>
+      <text x="50" y="85" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFB6C1">XYZ</text>
+      <circle cx="20" cy="25" r="8" fill="#FFE4E9"/>
+      <circle cx="80" cy="70" r="8" fill="#E0F4FF"/>
+    </symbol>
+
+    <symbol id="icon-art" viewBox="0 0 100 100">
+      <rect x="25" y="20" width="50" height="60" rx="5" fill="#FFEFD5" stroke="#DEB887" stroke-width="2"/>
+      <circle cx="50" cy="50" r="15" fill="#FF69B4"/>
+      <circle cx="40" cy="45" r="8" fill="#87CEEB"/>
+      <circle cx="60" cy="55" r="8" fill="#FFD700"/>
+      <circle cx="50" cy="60" r="6" fill="#90EE90"/>
+      <path d="M30 25 L20 15 M70 25 L80 15" stroke="#DEB887" stroke-width="3"/>
+      <circle cx="20" cy="15" r="5" fill="#FFB6C1"/>
+      <circle cx="80" cy="15" r="5" fill="#87CEEB"/>
+    </symbol>
+
+    <symbol id="icon-reading" viewBox="0 0 100 100">
+      <rect x="20" y="25" width="60" height="50" rx="3" fill="#FFF8DC"/>
+      <rect x="25" y="30" width="25" height="40" fill="#FFE4B5"/>
+      <rect x="52" y="30" width="25" height="40" fill="#FFE4B5"/>
+      <line x1="35" y1="38" x2="45" y2="38" stroke="#D2691E" stroke-width="2"/>
+      <line x1="35" y1="45" x2="48" y2="45" stroke="#D2691E" stroke-width="2"/>
+      <line x1="35" y1="52" x2="45" y2="52" stroke="#D2691E" stroke-width="2"/>
+      <line x1="62" y1="38" x2="72" y2="38" stroke="#D2691E" stroke-width="2"/>
+      <line x1="62" y1="45" x2="75" y2="45" stroke="#D2691E" stroke-width="2"/>
+    </symbol>
+
+    <symbol id="icon-sports" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#90EE90" stroke-width="4"/>
+      <path d="M50 20 L50 30 M50 70 L50 80 M20 50 L30 50 M70 50 L80 50" stroke="#90EE90" stroke-width="3"/>
+      <circle cx="50" cy="50" r="15" fill="#FFD700"/>
+      <polygon points="50,40 53,48 62,48 55,53 58,62 50,57 42,62 45,53 38,48 47,48" fill="#FFA500"/>
+    </symbol>
+
+    <symbol id="icon-music" viewBox="0 0 100 100">
+      <ellipse cx="30" cy="75" rx="15" ry="12" fill="#9370DB"/>
+      <ellipse cx="70" cy="65" rx="15" ry="12" fill="#9370DB"/>
+      <line x1="45" y1="15" x2="45" y2="75" stroke="#9370DB" stroke-width="4"/>
+      <line x1="85" y1="5" x2="85" y2="65" stroke="#9370DB" stroke-width="4"/>
+      <rect x="42" y="15" width="46" height="10" fill="#9370DB"/>
+    </symbol>
+
+    <symbol id="icon-drawing" viewBox="0 0 100 100">
+      <rect x="25" y="60" width="50" height="8" rx="2" fill="#DEB887"/>
+      <polygon points="75,68 90,30 95,35 80,68" fill="#FFE4C4"/>
+      <rect x="15" y="25" width="35" height="35" rx="5" fill="#FFF8DC" stroke="#DEB887" stroke-width="2"/>
+      <circle cx="25" cy="35" r="6" fill="#FF6B6B"/>
+      <circle cx="40" cy="40" r="6" fill="#4ECDC4"/>
+      <circle cx="32" cy="52" r="6" fill="#FFE66D"/>
+      <rect x="28" y="30" width="10" height="10" fill="#FF6B6B"/>
+    </symbol>
+
+    <symbol id="icon-plus" viewBox="0 0 24 24">
+      <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-edit" viewBox="0 0 24 24">
+      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="2" fill="none"/>
+      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" fill="none"/>
+    </symbol>
+
+    <symbol id="icon-delete" viewBox="0 0 24 24">
+      <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="2" fill="none"/>
+    </symbol>
+
+    <symbol id="icon-bell" viewBox="0 0 100 100">
+      <path d="M50 20 C30 20 20 35 20 50 L20 70 L80 70 L80 50 C80 35 70 20 50 20" fill="#FFD700" stroke="#FFA500" stroke-width="4"/>
+      <rect x="40" y="70" width="20" height="15" rx="3" fill="#FFD700" stroke="#FFA500" stroke-width="4"/>
+      <circle cx="50" cy="45" r="8" fill="#FFA500"/>
+      <ellipse cx="50" cy="95" rx="10" ry="5" fill="#FFA500"/>
+    </symbol>
+
+    <symbol id="icon-alarm" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="#FFE4E9" stroke="#FF69B4" stroke-width="4"/>
+      <circle cx="50" cy="50" r="35" fill="none" stroke="#FFB6C1" stroke-width="2" stroke-dasharray="5,5"/>
+      <line x1="50" y1="50" x2="50" y2="25" stroke="#FF69B4" stroke-width="4" stroke-linecap="round"/>
+      <line x1="50" y1="50" x2="70" y2="50" stroke="#4169E1" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="50" r="5" fill="#FF69B4"/>
+      <text x="50" y="18" text-anchor="middle" font-size="10" fill="#FF69B4">12</text>
+      <text x="82" y="54" text-anchor="middle" font-size="10" fill="#FF69B4">3</text>
+      <text x="50" y="90" text-anchor="middle" font-size="10" fill="#FF69B4">6</text>
+      <text x="18" y="54" text-anchor="middle" font-size="10" fill="#FF69B4">9</text>
+    </symbol>
+</svg>

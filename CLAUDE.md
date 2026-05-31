@@ -4,18 +4,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-小可爱日程时钟 — a single-file (index.html) schedule clock web app for kids. Pure HTML/CSS/JS, no build tools, no dependencies. Deployed via GitHub Pages.
+小可爱日程时钟 — schedule clock web app for kids. Pure HTML/CSS/JS, no build tools, no dependencies. Deployed via GitHub Pages.
 
 ## Architecture
 
-Everything lives in `index.html`:
-- **CSS** (lines 5–751): CSS custom properties for theming (`--pink-*`, `--blue-*`), responsive breakpoints at 480px
-- **SVG icons** (lines 755–901): Inline `<symbol>` definitions reused via `<use href="#icon-*"/>`
-- **HTML** (lines 903–1034): Clock face, schedule list, add/edit modal, alarm modal, FAB button
-- **JS** (lines 1036–1043): Single `ScheduleApp` class managing all state
+```
+index.html          — HTML structure (150 lines)
+styles.css          — All CSS (744 lines)
+icons.svg           — SVG symbol definitions (148 lines)
+js/
+├── icons.js        — Dynamically loads icons.svg into DOM
+├── storage.js      — LocalStorage read/write wrapper
+├── clock.js        — Clock display + hand animation
+├── alarm.js        — Alarm checking + Web Audio playback
+├── schedule.js     — Schedule CRUD, list rendering, modal interaction
+└── app.js          — Main entry, initializes all modules
+```
 
-Key JS patterns:
-- `ScheduleApp` class handles clock updates, alarm checking (1s interval), CRUD, rendering
+Key patterns:
+- Global `window.App` object as module namespace (no ES Modules)
+- Script loading order matters: `icons.js` → `storage.js` → `clock.js` → `alarm.js` → `schedule.js` → `app.js`
 - Data persists to `localStorage` under key `schedule_clock_data`
 - Alarm uses Web Audio API (`AudioContext` + `OscillatorNode`) — two-tone beep pattern
 - Schedule IDs are `Date.now().toString()`
